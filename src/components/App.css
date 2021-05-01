@@ -1,0 +1,95 @@
+.Container{
+  padding-left: 50px;
+  padding-right: 50px;
+  color:gray;
+
+}
+
+
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  
+}
+.headerItem{
+  cursor: pointer;
+}
+.headerItem:hover{
+  color:pink
+}
+
+.Input{
+  display: flex;
+  align-items: center;
+  height:50px;
+}
+.textarea{
+  border:solid 0px;
+  background-color: rgba(0,0,0,0);
+}
+.todoItem{
+  display: flex;
+  align-items: center;
+  height:50px;
+}
+.addIcon{
+  cursor: pointer;
+}
+.addIcon:hover{
+  color:pink
+}
+
+.cp_iptxt {
+	position: relative;
+	width: 80%;
+	/* margin: 40px 3%; */
+}
+.cp_iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0.3em;
+	transition: 0.3s;
+	letter-spacing: 1px;
+	color: #aaaaaa;
+	border: none;
+	border-bottom: 2px solid;
+	background: transparent;
+}
+.ef input[type='text']:focus {
+	/* border-bottom: 2px solid #da3c41; */
+	outline: none;
+}
+.-active{
+  display: none;
+}
+.DeleteIcon{
+  margin-left: auto;
+}
+.-checked{
+  display: none !important;
+}
+.-checkedSentence{
+  text-decoration: line-through; 
+}
+.todoItem:hover{
+  background-color:pink;
+  opacity: 0.8;
+}
+
+
+/* ドラックアンドドロップ */
+.drag-and-drop {
+  cursor: move;
+  /* position: absolute; */
+  z-index: 1000;
+  width: 100px;
+  height: 100px;
+  background-color:pink;
+  margin:10px;
+}
+
+.drag {
+  z-index: 1001;
+}
