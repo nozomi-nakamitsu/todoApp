@@ -1,17 +1,15 @@
-import React,{ FC, useState, useCallback,useContext } from 'react'
+import React,{ FC, useState, useCallback} from 'react'
 import { Card } from './Card'
 import update from 'immutability-helper'
-
 import AddIcon from '@material-ui/icons/Add';
-import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
+import  AlertComponent from './components/alert'
 
 
 export interface Item {
   id: number
   text: string
 }
-
 export interface ContainerState {
   cards: Item[]
 }
@@ -20,19 +18,27 @@ export const Container: FC = () => {
   {
     const [task, setTask] = useState("");
     const [cards, setCards] = useState([{ id: 0, name: "" },]);
+    const [message, setMessage] = useState("")
+    const [alert, setAlert] = useState("");
     // インプットタグ入力フォーム値取得
     const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
       setTask(() => event.target.value)
-      console.log(task)
     }
     // タスク追加
     const addtask=()=>{
-      var TaskIdArray=cards.map(v=>v.id)
-      var lastTaskID=TaskIdArray.slice(-1)[0]
-      setCards([...cards,{id: lastTaskID+1, name: task}]);
-      setTask("")
+      if (task!=""){
+        setAlert("success")
+        var TaskIdArray=cards.map(v=>v.id)
+        var lastTaskID=TaskIdArray.slice(-1)[0]
+        setCards([...cards,{id: lastTaskID+1, name: task}]);
+        setTask("")
+        setMessage("タスクを追加しました")
+      }else{
+        setAlert("error")
+        setMessage("空欄のタスクは登録できません！")
+      }
     }
-
 
     // エンタキー押した時にタスク追加
     const keyPress=(e :any)=>{
@@ -72,7 +78,10 @@ export const Container: FC = () => {
       )
     }
     }
-
+    // アラート初期化メソッド
+    const AlertResetFunc=()=>{
+      setAlert("")
+    }
     return (
   <>
   <div className= "Container">
@@ -81,7 +90,8 @@ export const Container: FC = () => {
     <div className="headerItem" onClick={()=> DeleteAllTask()}>全削除</div>
   </div>
   <hr/>
-   <CardsContext.Provider value={{cards,setCards}}>
+    <AlertComponent message={message} alert={alert}  AlertResetFunc={()=>AlertResetFunc()}/>
+    <CardsContext.Provider value={{cards,setCards}}>
     {cards.length!=1?
     <div>{cards.map((card:any , i:number) => renderCard(card, i))} </div>
     :null} 
@@ -99,7 +109,7 @@ export const Container: FC = () => {
       <AddIcon className="addIcon" onClick={()=>addtask()}/>
     </div>
     </CardsContext.Provider>
-    </div>
+</div>
   </>
     )
   }
