@@ -5,9 +5,7 @@ import update from 'immutability-helper'
 import AddIcon from '@material-ui/icons/Add';
 import CheckBoxOutlinedIcon from '@material-ui/icons/CheckBoxOutlined';
 import CheckBoxOutlineBlankOutlinedIcon from '@material-ui/icons/CheckBoxOutlineBlankOutlined';
-const style = {
-  width: 400,
-}
+
 
 export interface Item {
   id: number
@@ -85,7 +83,7 @@ export const Container: FC = () => {
   <hr/>
    <CardsContext.Provider value={{cards,setCards}}>
     {cards.length!=1?
-    <div style={style}>{cards.map((card:any , i:number) => renderCard(card, i))} </div>
+    <div>{cards.map((card:any , i:number) => renderCard(card, i))} </div>
     :null} 
     {/* inputタグ */}
     <div className="Input">
